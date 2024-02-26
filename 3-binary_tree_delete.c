@@ -1,7 +1,6 @@
 #include "binary_trees.h"
 
 /**
-*
 *binary_tree_delete - Deletes the required node
 *@tree: a pointer to the root node of the tree to delete
 *Return: void

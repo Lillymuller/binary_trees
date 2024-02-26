@@ -1,7 +1,6 @@
 #include "binary_trees.h"
 
 /**
-*
 *binary_tree_is_leaf - End nodes with out child node
 *@node: a pointer to the node to check
 *Return: 1 if nnode is a leaf, 0 otherwise
