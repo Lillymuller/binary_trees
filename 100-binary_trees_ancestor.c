@@ -9,7 +9,8 @@
  *
  */
 
-binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
+binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
+		const binary_tree_t *second)
 {
 	binary_tree_t *parent;
 
@@ -36,15 +37,15 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tr
 	}
 
 	parent = first->parent;
-	
+
 	/* checks if the second is an ancestor of the first */
 	while (parent)
 	{
-		 if (parent == second)
-                {
-                        return ((binary_tree_t *)second); /* ancestor found */
-                }
-                parent = parent->parent;
+		if (parent == second)
+		{
+			return ((binary_tree_t *)second); /* ancestor found */
+		}
+		parent = parent->parent;
 	}
 
 	/* No common ancestor found, continue searching */
