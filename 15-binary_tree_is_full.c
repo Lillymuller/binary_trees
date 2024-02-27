@@ -9,32 +9,26 @@
 *
 */
 
-int check_tree_is_full(const binary_tree_t *tree)
+int binary_tree_is_full(const binary_tree_t *tree) 
 {
-	if (tree != NULL)
-	{
-		if ((tree->left && !tree->right) || (!tree->left && tree->right))
-			return (0);
-		if (check_tree_is_full(tree->left) || 
-				check_tree_is_full(tree->right))
-			return (0);
-	}
+    if (tree == NULL) 
+    {
+        // Empty tree is not considered full
+        return (0);
+    }
 
-	return (1);
-}
+    // Check for violation: one child but not both
+    if ((tree->left == NULL) != (tree->right == NULL)) 
+    {
+        return (0);
+    }
 
+    // Recursively check children if both present
+    if (tree->left != NULL) 
+    {
+        return (binary_tree_is_full(tree->left) && binary_tree_is_full(tree->right));
+    }
 
-
-/**
-*
-*
-*/
-
-int binary_tree_is_full(const binary_tree_t *tree)
-{
-	if (tree == NULL)
-		return (0);
-
-	return (check_tree_is_full(tree));
-
+    // If we reach here, both children are NULL, so implicitly full
+    return (1);
 }
