@@ -11,16 +11,16 @@
 
 int is_bst_search(const binary_tree_t *tree, int lower, int higher)
 {
+	if (!tree)
+		return (1);
 
-        if (!tree)
-                return (1);
+	if (tree->n <= lower || tree->n >= higher)
+		return (0);
 
-        if (tree->n <= lower || tree->n >= higher)
-                return (0);
-
-        return (is_bst_search(tree->left, lower, tree->n) && is_bst_search(tree->right, tree->n, higher));
-
+	return (is_bst_search(tree->left, lower, tree->n) &&
+			is_bst_search(tree->right, tree->n, higher));
 }
+
 
 
 
