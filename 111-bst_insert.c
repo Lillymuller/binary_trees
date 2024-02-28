@@ -13,59 +13,39 @@
 
 bst_t *bst_insert(bst_t **tree, int value)
 {
-	bst_t *node = *tree;
-	bst_t *tmp;
-
-	if (!tree)
+	if (*tree == NULL)
 	{
-		return (NULL);
+		*tree = binary_tree_node(NULL, value);
+		return (*tree);
 	}
 
-	/* Find the insertion position using recursion */
-	while (node)
+	if (value == (*tree)->n)
 	{
-		if (value < node->n)
-		{
-			/* move left if smaller */
-			if (!node->left)
-			{
-				break; /* insertion point found */
-			}
-			else
-			{
-				node = node->left;
-			}
-		}
-		else if (value > node->n)
-		{
-			/* move right if large */
-			if (!node->right)
-			{
-				break; /* insertion point found */
-			}
-			else
-			{
-				node = node->right;
-			}
-		}
-		return (NULL);
+		return (NULL); /*Node with the value already exists*/
 	}
-	tmp = binary_tree_node(node, value);
-	if (!tmp)
-		return (NULL);
-	if (!node)
+	else if (value < (*tree)->n)
 	{
-		/* empty tree, tmp becomes the root */
-		return (*tree = tmp);
-	}
-	else if (value < node->n)
-	{
-		return (node->left = tmp);
+		if ((*tree)->left != NULL)
+		{
+			return (bst_insert(&((*tree)->left), value)); /*Recur on the left subtree*/
+		}
+		else
+		{
+			(*tree)->left = binary_tree_node(*tree, value);
+			return ((*tree)->left);
+		}
 	}
 	else
 	{
-		return (node->right = tmp);
+		if ((*tree)->right != NULL)
+		{
+			return (bst_insert(&((*tree)->right), value));
+			/*Recur on the right subtree*/
+		}
+		else
+		{
+			(*tree)->right = binary_tree_node(*tree, value);
+			return ((*tree)->right);
+		}
 	}
-
-	return (tmp);
 }
