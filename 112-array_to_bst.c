@@ -26,7 +26,7 @@ bst_t *array_to_bst(int *array, size_t size)
 			if (array[b] == array[a])
 				break; /* duplication found skip insertion */
 		}
-		
+
 		if (b == a)
 		{
 			/* No duplication found insert into BST */
