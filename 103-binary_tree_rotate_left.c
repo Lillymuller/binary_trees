@@ -8,7 +8,7 @@
 
 binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree)
 {
-	binary_tree_t *top, *new;
+	binary_tree_t *top, *parent;
 
 	/* can't rorate with out a valid right child */
 	if (!tree || !tree->right)
@@ -16,33 +16,34 @@ binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree)
 		return (NULL);
 	}
 
-	/*perform rotation directly on pointer */
-	tree->right->left = tree; /*attach  new left child*/
-	tree->parent = tree->right; /* update parent pivot */
-
 	/*handles top and parent */
 	top = tree->right; /*stores top return */
-	new = top->left;
-	tree->right = new; /* attaches left pivot to right */
+	parent = tree->parent;
 
-	if (new)
+	while (1)
 	{
-		new->parent = tree;
-	}
-
-	top->parent = tree->parent;
-
-	/* updates the grandparents child */
-	if (top->parent)
-	{
-		if (top->parent->left == tree)
+		tree->right = top->left;
+		top->left = tree;
+		tree->parent = top;
+		
+		if (top->left)
 		{
-			top->parent->left = top;
+			top->left->parent = tree;
 		}
-		else
+		
+		if (parent)
 		{
-			top->parent->right = top;
+			if (parent->left == tree)
+			{
+				parent->left = top;
+			}
+			else
+			{
+				parent->right = top;
+			}
 		}
+		top->parent = parent;
+		break;
 	}
 
 	return (top);
