@@ -11,8 +11,6 @@
 
 int is_bst_search(const binary_tree_t *tree, int lower, int higher)
 {
-        lower = INT_MIN;
-        higher = INT_MAX;
 
         if (!tree)
                 return (1);
@@ -20,7 +18,7 @@ int is_bst_search(const binary_tree_t *tree, int lower, int higher)
         if (tree->n <= lower || tree->n >= higher)
                 return (0);
 
-        return (is_bst_search(tree->left, lower, tree->n - 1) && is_bst_search(tree->right, tree->n + 1, higher));
+        return (is_bst_search(tree->left, lower, tree->n) && is_bst_search(tree->right, tree->n, higher));
 
 }
 
