@@ -105,7 +105,7 @@ bst_t *remove_recursive(bst_t *root, bst_t *node, int value)
 		node->right = remove_recursive(root, node->right, value);
 	else
 		root = successor_delete(root, node);
-	return (root);
+	return (NULL);
 }
 
 
